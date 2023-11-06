@@ -4,7 +4,8 @@ const babyProductSchema = require('./babyProductSchema')
 
 const lineItemSchema = new Schema({
     qty: { type: Number, default: 1 },
-    babyProduct: babyProductSchema
+    babyProduct: babyProductSchema,
+    selectedSize: String,
 }, 
 {
     // timestamps: true,
@@ -46,17 +47,40 @@ orderSchema.statics.getCart = function(userId) {
     )
 }
 
-orderSchema.methods.addItemToCart = async function(babyProductId) {
-    const cart = this
-    const lineItem = cart.lineItems.find(lineItem => lineItem.babyProduct._id.equals(babyProductId))
-    if(lineItem) {
-        lineItem.qty += 1
+orderSchema.methods.addItemToCart = async function(babyProductId, selectedSize) {
+    const cart = this;
+    const lineItem = cart.lineItems.find(lineItem => lineItem.babyProduct._id.equals(babyProductId));
+    if (lineItem) {
+        lineItem.qty += 1;
+        lineItem.selectedSize = selectedSize; // Update the selected size in the existing lineItem
     } else {
-        const babyProduct = await mongoose.model('BabyProduct').findById(babyProductId)
-        cart.lineItems.push({ babyProduct })
+        const babyProduct = await mongoose.model('BabyProduct').findById(babyProductId);
+        const newLineItem = {
+            babyProduct,
+            selectedSize: selectedSize  // Set selectedSize for the new lineItem
+        };
+        console.log(newLineItem)
+        cart.lineItems.push(newLineItem);
     }
-    return cart.save()
-}
+    console.log(selectedSize);
+    return cart.save();
+};
+// orderSchema.methods.addItemToCart = async function(babyProductId, selectedSize) {
+//     const cart = this;
+//     const lineItem = cart.lineItems.find(lineItem => lineItem.babyProduct._id.equals(babyProductId));
+//     if (lineItem) {
+//       lineItem.qty += 1;
+//     } else {
+//       const babyProduct = await mongoose.model('BabyProduct').findById(babyProductId);
+//       const newLineItem = { babyProduct };
+//       if (selectedSize) {
+//         newLineItem.selectedSize = selectedSize; // Store the selected size as a single value
+//       }
+//       cart.lineItems.push(newLineItem);
+//     }
+//     console.log(selectedSize)
+//     return cart.save();
+//   };
 
 orderSchema.methods.setItemQty = function(babyProductId, newQty) {
     const cart = this

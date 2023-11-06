@@ -1,21 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react'
 import * as vehiclesAPI from '../../utilities/baby-products-api';
-import VehicleItems from '../../components/VehicleItems/VehicleItems';
+import VehicleItems from '../../components/BabyProductItems/BabyProductItems';
 import Loader from '../../components/Loader/Loader';
 
 export default function Vehicle() {
-    const [vehicleItems, setVehicleItems] = useState([]);
+    const [babyProductItems, setBabyProductItems] = useState([]);
     const [activeCat, setActiveCat] = useState('')
     const [isLoading, setIsLoading] = useState(true)
     const categoriesRef = useRef([])
 
     useEffect(function(){
         (async function(){
-            const vehicles = await vehiclesAPI.getAll()
-            setVehicleItems(vehicles)
+            const products = await vehiclesAPI.getAll()
+            setBabyProductItems(products)
             setIsLoading(false)
         })()
     }, [])
+    
   return (
     <>
     {isLoading ? (
@@ -24,8 +25,8 @@ export default function Vehicle() {
       </div>
     ) :(
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
-    {vehicleItems.map((vehicle, index) => (
-      <VehicleItems key={vehicle._id} vehicleItem={vehicle} />
+    {babyProductItems.map((babyProduct, index) => (
+      <VehicleItems key={babyProduct._id} babyProductItem={babyProduct} />
       ))}
   </div>
     )}

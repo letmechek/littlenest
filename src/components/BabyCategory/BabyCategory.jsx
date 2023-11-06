@@ -2,7 +2,7 @@ import React from 'react'
 import * as vehiclesAPI from '../../utilities/baby-products-api.js';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import VehicleItems from '../VehicleItems/VehicleItems';
+import VehicleItems from '../BabyProductItems/BabyProductItems.jsx';
 import VehicleList from '../VehicleList/VehicleList';
 import Loader from '../Loader/Loader';
 

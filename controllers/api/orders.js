@@ -15,15 +15,24 @@ async function cart(req, res) {
   res.json(cart)
 }
 
+// async function addToCart(req, res) {
+//   const cart = await Order.getCart(req.user._id)
+//   await cart.addItemToCart(req.params.id)
+//   res.json(cart)
+// }
+
 async function addToCart(req, res) {
-  const cart = await Order.getCart(req.user._id)
-  await cart.addItemToCart(req.params.id)
+  const { id } = req.params;
+  const { selectedSize } = req.body;
+  console.log(selectedSize +' controller orders')
+  const cart = await Order.getCart(req.user._id);
+  await cart.addItemToCart(id, selectedSize);
   res.json(cart)
 }
 
 async function setItemQtyInCart(req, res) {
   const cart = await Order.getCart(req.user._id)
-  await cart.setItemQty(req.body.vehicleId, req.body.newQty)
+  await cart.setItemQty(req.body.babyProductId, req.body.newQty)
   res.json(cart)
 }
 
@@ -38,20 +47,20 @@ async function checkout(req, res) {
     const orderTotalCents = order.orderTotal * 100;
 
     const lineItems = order.lineItems.map((item) => {
-      let imagess = item.vehicle.image[0]
+      let imagess = item.babyProduct.image[0]
       return {
         price_data: {
           currency: 'usd',
           product_data: {
-            name: item.vehicle.name, 
+            name: item.babyProduct.name, 
             // images: [imagess],
           },
-          unit_amount: item.vehicle.price * 100 
+          unit_amount: item.babyProduct.price * 100 
         },
         quantity: item.qty,
       };
     });
-    console.log(order.lineItems[0].vehicle)
+    console.log(order.lineItems[0].babyProduct)
 
     const session = await stripe.checkout.sessions.create({
       line_items: lineItems, 

@@ -160,19 +160,19 @@ export default function FooterWithSitemap() {
       </div>
       <div class="mb-6 pr-8 pl-8 ">
         <p>
-          Children are canvases, and Little Nest Apparel is a vision of this
+          Children are canvases, and Little Nest  is a vision of this
           enduring philosophy. Our founders traversed the globe to gain youthful
           inspiration for what is now this much beloved children's brand.
-          Luibelle today continues to mine the minds of fashion's finest
+          Little Nest  today continues to mine the minds of fashion's finest
           artisans to create haute designs for young boys and girls. The line's
           artful attire blends luxury and whimsy, always conjuring an elegant
           sense of culture with the perfect dash of childhood innocence.
-          Luibelle kids are sweet and dapper, bringing the avant-garde to the
+          Little Nest kids are sweet and dapper, bringing the avant-garde to the
           playground. From babies to toddlers and beyond, our exclusive fashions
           offer style and comfort to instill early confidence and help embrace
-          self-expression. Luibelle apparel speaks to the posh parent who loves
+          self-expression.  Little Nest Apparel speaks to the posh parent who loves
           everything young, inspired and upscale. With children growing up so
-          fast, Luibelle kindles their iconic style to last forever.
+          fast,  Little Nest kindles their iconic style to last forever.
         </p>
       </div>
 

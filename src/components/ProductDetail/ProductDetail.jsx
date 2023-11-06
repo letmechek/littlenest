@@ -13,6 +13,7 @@ export default function ProductDetail({ user }) {
   const [cart, setCart] = useState(null);
   const { id } = useParams();
   const [vehicle, setVehicle] = useState(null);
+  const [selectedSize, setSelectedSize] = useState([]); 
   let navigate = useNavigate();
   const location = useLocation();
 
@@ -37,15 +38,33 @@ export default function ProductDetail({ user }) {
     );
   }
 
-  async function handleAddToOrder(id) {
+  async function handleAddToOrder(id, selectedSize) {
     if (user) {
-      const updatedCart = await ordersAPI.addItemToCart(id);
+      const updatedCart = await ordersAPI.addItemToCart(id, selectedSize);
       alert("Your order has been added to the cart");
       setCart(updatedCart);
       navigate("/cart");
     } else {
       navigate("/login", { state: { from: location } });
     }
+  }
+  // if (user) {
+  //   if (selectedSize) {
+  //     const updatedCart = await ordersAPI.addItemToCart(id, selectedSize); // Pass the selected size to the API call
+  //     alert("Your order has been added to the cart");
+  //     setCart(updatedCart);
+  //     navigate("/cart");
+  //   } else {
+  //     alert("Please select a size before adding to the cart.");
+  //   }
+  // } else {
+  //   navigate("/login", { state: { from: location } });
+  // }
+// }
+
+  function handleSizeSelection(size) {
+    console.log(size);
+    setSelectedSize(size); 
   }
 
   return (
@@ -80,17 +99,20 @@ export default function ProductDetail({ user }) {
           </p>
           <p className="text-gray-600 mt-4 text-lg">{vehicle.description}</p>
           <div className="flex flex-wrap gap-2 mt-4">
-            {vehicle.size.map((size, index) => (
-              <div
-                // key={index}
-                className="border border-gray-300 rounded-md p-2 text-sm"
-              >
-                {size}
-              </div>
-            ))}
+          {vehicle.size.map((size, index) => (
+          <button
+            key={index}
+            onClick={() => handleSizeSelection(size)} // Call the new function on size selection
+            className={`border p-2 text-sm rounded-md ${
+              selectedSize === size ? "border-blue-500" : "border-gray-300"
+            }`}
+          >
+            {size}
+          </button>
+        ))}
           </div>
           <button
-            onClick={() => handleAddToOrder(id)}
+            onClick={() => handleAddToOrder(id, selectedSize)}
             className="bg-custom-yellow hover:bg-pink-800 text-white font-bold py-2 px-4 rounded mt-6 md:mt-4"
           >
             Add To Cart

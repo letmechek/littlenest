@@ -5,7 +5,7 @@ import Faq from "../../components/Faq/Faq";
 import * as categoriesAPI from '../../utilities/baby-categories-api'
 import Loader from "../../components/Loader/Loader";
 import Vehicle from "../Vehicle/Vehicle";
-import VehicleItems from "../../components/VehicleItems/VehicleItems";
+import VehicleItems from "../../components/BabyProductItems/BabyProductItems";
 
 export default function Home() {
     const [vehicleItems, setVehicleItems] = useState([])

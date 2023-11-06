@@ -33,10 +33,11 @@ async function handleCheckout(orderId) {
   }
 }
   const lineItems = cart ? cart.lineItems.map((vehicle) => (
+   
+    console.log(cart),
     <CartIcon totalQty={cart.lineItems.length} /> 
   )) : null;
  
-console.log(orderId)
   return (
     <>
     <div className="container mx-auto mt-10 ">

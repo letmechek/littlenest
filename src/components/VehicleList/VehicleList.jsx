@@ -1,8 +1,8 @@
 import React , { useEffect}from 'react';
-import VehicleItems from '../VehicleItems/VehicleItems';
+import VehicleItems from '../BabyProductItems/BabyProductItems';
 import ScrollReveal from "scrollreveal";
 
-export default function VehicleList({ vehicleItem, handleAddToOrder }) {
+export default function VehicleList({ babyProductItem, handleAddToOrder }) {
   const sr = ScrollReveal();
   useEffect(() => {
     sr.reveal(".scroll", {
@@ -13,11 +13,12 @@ export default function VehicleList({ vehicleItem, handleAddToOrder }) {
       scale: 1,
     });
   }, []);
+
   return (
     <div className='scroll'>
         <VehicleItems
-          key={vehicleItem._id}
-          vehicleItem={vehicleItem}
+          key={babyProductItem._id}
+          babyProductItem={babyProductItem}
           handleAddToOrder={handleAddToOrder}
         />
     </div>
