@@ -23,10 +23,10 @@ async function cart(req, res) {
 
 async function addToCart(req, res) {
   const { id } = req.params;
-  const { selectedSize } = req.body;
+  const { selectedSize, selectedColor } = req.body;
   console.log(selectedSize +' controller orders')
   const cart = await Order.getCart(req.user._id);
-  await cart.addItemToCart(id, selectedSize);
+  await cart.addItemToCart(id, selectedSize, selectedColor);
   res.json(cart)
 }
 

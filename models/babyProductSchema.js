@@ -7,7 +7,8 @@ const babyProductSchema = new Schema({
   image: [{ type: String, required: true }],
   BabyCategory: {type: Schema.Types.ObjectId, ref: 'BabyCategory'},
   price: { type: Number, required: true, default: 0 },
-  size: [{ type: String }]
+  size: [{ type: String }],
+  color: [{ type: String, required: true }],
 }, {
   timestamps: true
 });

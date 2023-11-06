@@ -6,8 +6,8 @@ export function getCart() {
   return sendRequest(`${BASE_URL}/cart`);
 }
 
-export function addItemToCart(babyProductId, selectedSize) {
-  return sendRequest(`${BASE_URL}/cart/vehicles/${babyProductId}`, 'POST', { selectedSize });
+export function addItemToCart(babyProductId, selectedSize, selectedColor) {
+  return sendRequest(`${BASE_URL}/cart/vehicles/${babyProductId}`, 'POST', { selectedSize, selectedColor });
 }
 
 export function setItemQtyInCart(babyProductId, newQty) {

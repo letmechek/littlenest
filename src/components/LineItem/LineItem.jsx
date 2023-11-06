@@ -12,7 +12,7 @@ export default function LineItem({lineItem, isPaid, handleChangeQty}) {
           
           </div>
         <div className="flex flex-col justify-between ml-4 flex-grow">
-          <span className="font-bold text-sm">{lineItem.babyProduct.name}, {lineItem.selectedSize}</span>
+          <span className="font-bold text-sm">{lineItem.babyProduct.name}, {lineItem.selectedSize}, {lineItem.selectedColor}</span>
         </div>
       </div>
       {/* Quantity */}

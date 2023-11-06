@@ -14,6 +14,7 @@ export default function ProductDetail({ user }) {
   const { id } = useParams();
   const [vehicle, setVehicle] = useState(null);
   const [selectedSize, setSelectedSize] = useState([]); 
+  const [selectedColor, setSelectedColor] = useState([])
   let navigate = useNavigate();
   const location = useLocation();
 
@@ -38,9 +39,9 @@ export default function ProductDetail({ user }) {
     );
   }
 
-  async function handleAddToOrder(id, selectedSize) {
+  async function handleAddToOrder(id, selectedSize, selectedColor) {
     if (user) {
-      const updatedCart = await ordersAPI.addItemToCart(id, selectedSize);
+      const updatedCart = await ordersAPI.addItemToCart(id, selectedSize, selectedColor);
       alert("Your order has been added to the cart");
       setCart(updatedCart);
       navigate("/cart");
@@ -48,23 +49,15 @@ export default function ProductDetail({ user }) {
       navigate("/login", { state: { from: location } });
     }
   }
-  // if (user) {
-  //   if (selectedSize) {
-  //     const updatedCart = await ordersAPI.addItemToCart(id, selectedSize); // Pass the selected size to the API call
-  //     alert("Your order has been added to the cart");
-  //     setCart(updatedCart);
-  //     navigate("/cart");
-  //   } else {
-  //     alert("Please select a size before adding to the cart.");
-  //   }
-  // } else {
-  //   navigate("/login", { state: { from: location } });
-  // }
-// }
 
   function handleSizeSelection(size) {
     console.log(size);
     setSelectedSize(size); 
+  }
+
+  function handleColorSelection(color) {
+    console.log(color);
+    setSelectedColor(color)
   }
 
   return (
@@ -111,8 +104,21 @@ export default function ProductDetail({ user }) {
           </button>
         ))}
           </div>
+          <div className="flex flex-wrap gap-2 mt-4">
+          {vehicle.color.map((color, index) => ( // Map through colors
+            <button
+              key={index}
+              onClick={() => handleColorSelection(color)} // Call function on color selection
+              className={`border p-2 text-sm rounded-md ${
+                selectedColor === color ? "border-blue-500" : "border-gray-300"
+              }`}
+            >
+              {color}
+            </button>
+          ))}
+        </div>
           <button
-            onClick={() => handleAddToOrder(id, selectedSize)}
+            onClick={() => handleAddToOrder(id, selectedSize, selectedColor)}
             className="bg-custom-yellow hover:bg-pink-800 text-white font-bold py-2 px-4 rounded mt-6 md:mt-4"
           >
             Add To Cart
