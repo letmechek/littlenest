@@ -9,6 +9,7 @@ const babyProductSchema = new Schema({
   price: { type: Number, required: true, default: 0 },
   size: [{ type: String }],
   color: [{ type: String }],
+  inStock: { type: Number, default: 0 }
 }, {
   timestamps: true
 });
