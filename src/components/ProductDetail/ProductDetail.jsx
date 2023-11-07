@@ -76,12 +76,12 @@ export default function ProductDetail({ user }) {
           </Carousel>
         </div>
         <div className="flex-1 mt-6 md:mt-0 md:ml-8 text-left">
-          <h2 className="text-4xl font-semibold text-gray-800 mb-2">{vehicle.name}</h2>
+          <h2 className="text-2xl font-medium text-gray-800 mb-2">{vehicle.name}</h2>
           {vehicle.inStock > 0 ? (
             <span className="w-3 h-3 text-green-500 ">IN STOCK</span>
           ):
           (
-            <span className="w-3 h-3 text-gray-300 ">OUT OF STOCK</span>
+            <span className="w-3 h-3 text-gray-500 ">OUT OF STOCK</span>
           )}
           <p className="text-black text-lg mt-2">${vehicle.price}</p>
           <p className="text-gray-600 text-lg mt-4">{vehicle.description}</p>
