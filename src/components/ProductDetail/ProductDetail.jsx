@@ -13,8 +13,8 @@ export default function ProductDetail({ user }) {
   const [cart, setCart] = useState(null);
   const { id } = useParams();
   const [vehicle, setVehicle] = useState(null);
-  const [selectedSize, setSelectedSize] = useState([]); 
-  const [selectedColor, setSelectedColor] = useState([])
+  const [selectedSize, setSelectedSize] = useState(''); 
+  const [selectedColor, setSelectedColor] = useState('')
   let navigate = useNavigate();
   const location = useLocation();
 
@@ -107,14 +107,13 @@ export default function ProductDetail({ user }) {
           <div className="flex flex-wrap gap-2 mt-4">
           {vehicle.color.map((color, index) => ( // Map through colors
             <button
-              key={index}
-              onClick={() => handleColorSelection(color)} // Call function on color selection
-              className={`border p-2 text-sm rounded-md ${
-                selectedColor === color ? "border-blue-500" : "border-gray-300"
-              }`}
-            >
-              {color}
-            </button>
+            key={index}
+            onClick={() => handleColorSelection(color)}
+            className={`rounded-full w-8 h-8 border-2 border-silver focus:outline-none focus:ring focus:border-blue-300 ${
+              selectedColor === color ? 'border-blue-100' : 'border-gray-300'
+            }`}
+            style={{ backgroundColor: color }}
+          ></button>
           ))}
         </div>
           <button
