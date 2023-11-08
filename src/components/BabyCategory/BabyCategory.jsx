@@ -7,18 +7,19 @@ import VehicleList from '../VehicleList/VehicleList';
 import Loader from '../Loader/Loader';
 
 export default function BabyCategory() {
-    const [babyProducts, setbabyProducts] = useState(null)
+    const [babyProducts, setbabyProducts] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const {modelId} = useParams()
     useEffect(function(){
         async function fetchVehicles(){
             const babyProducts = await vehiclesAPI.getProductByCategory(modelId)
             setbabyProducts(babyProducts)
+            console.log(babyProducts[0]._id + ' logged')
             setIsLoading(false)
         }
         fetchVehicles()
     }, [modelId])
-console.log(babyProducts +'vehicles')
+console.log(babyProducts +' vehicles')
   return (
     <>
     {isLoading ? (

@@ -8,6 +8,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import * as ordersAPI from "../../utilities/orders-api";
 import Loader from "../Loader/Loader";
 import { ChevronLeftIcon } from "@heroicons/react/24/solid";
+import './ProductDetail.css'
 
 export default function ProductDetail({ user }) {
   const [cart, setCart] = useState(null);
@@ -15,8 +16,28 @@ export default function ProductDetail({ user }) {
   const [vehicle, setVehicle] = useState(null);
   const [selectedSize, setSelectedSize] = useState(''); 
   const [selectedColor, setSelectedColor] = useState('')
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   let navigate = useNavigate();
   const location = useLocation();
+  const responsive = {
+    superLargeDesktop: {
+      breakpoint: { max: 4000, min: 3000 },
+      items: 1,
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 1,
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 1,
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1,
+    },
+  };
+  
 
   useEffect(() => {
     async function fetchVehicle() {
@@ -62,26 +83,47 @@ export default function ProductDetail({ user }) {
 
   return (
     <>
-      <Link to="#" onClick={() => navigate(-1)} className="hover:underline mb-2 inline-flex items-center p-2">
+    <div className="bg-white p-4 md:p-8 mx-auto max-w-6xl">
+      <Link to="#" onClick={() => navigate(-1)} className="hover:underline mb-2 inline-flex items-center ">
         <ChevronLeftIcon className="h-6 w-6" /> Back
       </Link>
-      <div className="bg-white p-4 md:p-8 flex flex-col md:flex-row mx-auto max-w-6xl">
+      <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-3/5 rounded-xl overflow-hidden">
-          <Carousel showThumbs={false}>
-            {vehicle.image.map((image, index) => (
-              <div key={index}>
-                <img src={image} alt={`${vehicle.name} `} className="h-auto w-full object-cover" />
-              </div>
-            ))}
-          </Carousel>
+        <Carousel
+              additionalTransfrom={0}
+              arrows
+              autoPlaySpeed={3000}
+              centerMode={false}
+              containerClass="container-padding-bottom"
+              customTransition="all .5"
+              dotListClass=""
+              focusOnSelect={false}
+              infinite={true}
+              itemClass=""
+              keyBoardControl
+              minimumTouchDrag={80}
+              renderButtonGroupOutside={false}
+              renderDotsOutside={false}
+              responsive={'hello'}
+              showDots={false}
+              sliderClass=""
+              slidesToSlide={1}
+              swipeable
+            >
+              {vehicle.image.map((image, index) => (
+                <div key={index}>
+                  <img src={image} alt={`${vehicle.name}`} className="h-auto w-full object-cover" />
+                </div>
+              ))}
+            </Carousel>
         </div>
         <div className="flex-1 mt-6 md:mt-0 md:ml-8 text-left">
           <h2 className="text-2xl font-medium text-gray-800 mb-2">{vehicle.name}</h2>
           {vehicle.inStock > 0 ? (
-            <span className="w-3 h-3 text-green-500 ">IN STOCK</span>
+            <span className="w-3 h-3 text-green-500 font-extrabold ">IN STOCK</span>
           ):
           (
-            <span className="w-3 h-3 text-gray-500 ">OUT OF STOCK</span>
+            <span className="w-3 h-3 text-gray-500 font-extrabold">OUT OF STOCK</span>
           )}
           <p className="text-black text-lg mt-2">${vehicle.price}</p>
           <p className="text-gray-600 text-lg mt-4">{vehicle.description}</p>
@@ -117,6 +159,7 @@ export default function ProductDetail({ user }) {
             </button>
           </div>
         </div>
+      </div>
       </div>
     </>
   );

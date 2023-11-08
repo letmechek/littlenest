@@ -13,7 +13,7 @@ export default function BrandsList({ cat }) {
       scale: 1,
     });
   }, []);
-  console.log(cat);
+  console.log(cat._id);
   return (
     <div className="scroll m-4 flex flex-col items-center justify-center pt-1">
     <Link to={`/model/${cat._id}`}>

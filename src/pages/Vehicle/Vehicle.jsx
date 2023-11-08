@@ -16,7 +16,7 @@ export default function Vehicle() {
             setIsLoading(false)
         })()
     }, [])
-    
+ 
   return (
     <>
     {isLoading ? (
