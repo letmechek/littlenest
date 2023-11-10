@@ -1,3 +1,7 @@
 .react-multi-carousel-arrow {
     color: black; /* Change the color to black or any desired color */
   }
+  .carousel-scroll-container {
+    max-height: 400px; /* Adjust the height as needed */
+    overflow-y: auto;
+  }

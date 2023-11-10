@@ -17,8 +17,8 @@ export default function OrderDetail() {
     fetchCart();
   }, []);
 
-async function handleChangeQty(vehicleId, newQty) {
-  const updatedCart = await ordersAPI.setItemQtyInCart(vehicleId, newQty)
+async function handleChangeQty(babyProductId, newQty) {
+  const updatedCart = await ordersAPI.setItemQtyInCart(babyProductId, newQty)
   setCart(updatedCart)
 }
 // const orderId =  cart._id 
@@ -27,7 +27,8 @@ async function handleCheckout(orderId) {
   try {
     const response = await ordersAPI.checkout(orderId);
     console.log(response.sessionUrl)
-    window.open(response.sessionUrl, '_blank')
+    // window.open(response.sessionUrl, '_blank')
+    window.location.href = response.sessionUrl
   } catch (error) {
     console.error(error);
   }

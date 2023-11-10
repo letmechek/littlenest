@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { signUp } from '../../utilities/users-service'
 import logo from '../../Assets/images/logo.png'
+import { useNavigate } from 'react-router-dom'
 
 export default function SignUpForm({ setUser }) {
     const [formData, setFormData] = useState({
@@ -12,7 +13,7 @@ export default function SignUpForm({ setUser }) {
         error: ''
     })
     const disable = formData.password !== formData.confirm;
-
+    const navigate = useNavigate();
     function handleChange(evt) {
         setFormData({
             ...formData,
@@ -29,6 +30,7 @@ export default function SignUpForm({ setUser }) {
             delete formDataCopy.confirm
             const user = await signUp(formDataCopy)
             setUser(user)
+            navigate('/')
         } catch {
             setFormData({
                 ...formData,
