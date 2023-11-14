@@ -12,7 +12,7 @@ module.exports = {
       },
       backgroundColor: {
         'custom-yellow': '#EBE2D5',
-        'custom-blue': 'rgba(18, 45, 55)',
+        'custom-yellow1': 'bg-yellow-700',
       }
     },
   },

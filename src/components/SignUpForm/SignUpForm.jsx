@@ -49,24 +49,24 @@ export default function SignUpForm({ setUser }) {
               <form autoComplete="off" onSubmit={handleSubmit} className='space-y-6'>
                 <div>
                     <label className='block text-sm font-medium leading-6 text-gray-900'>Name</label>
-                    <input type="text" name="name" value={formData.name} onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'/>
+                    <input type="text" name="name" value={formData.name} onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'/>
                 </div>
 
                 <div>
                     <label className='block text-sm font-medium leading-6 text-gray-900'>Email Address</label>
                     <div className='mt-2'>
-                        <input type="text" name="email" value={formData.email}  onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'/>
+                        <input type="text" name="email" value={formData.email}  onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'/>
                     </div>
                 </div>
 
                 <div className=''>
                 <label className='block text-sm font-medium leading-6 text-gray-900'>Password</label>
-                <input type="password" name="password" value={formData.password} onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'/>
+                <input type="password" name="password" value={formData.password} onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'/>
                 </div>
 
                 <div>
                     <label className='block text-sm font-medium leading-6 text-gray-900'>Confirm</label>
-                    <input type="password" name="confirm" value={formData.confirm} onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6'/>
+                    <input type="password" name="confirm" value={formData.confirm} onChange={handleChange} required className='block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 pl-2'/>
                 </div>
 
                 <div>

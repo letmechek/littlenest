@@ -11,3 +11,6 @@ export function getProductByCategory(modelId) {
 export function getById(id) {
     return sendRequest(`${BASE_URL}/${id}`)
 }
+export function searchProducts(query) {
+    return sendRequest(`${BASE_URL}/search?q=${query}`);
+  }
