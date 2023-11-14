@@ -17,3 +17,11 @@ export function setItemQtyInCart(babyProductId, newQty) {
 export function checkout(orderId) {
   return sendRequest(`${BASE_URL}/create-checkout-session/${orderId}`, 'POST');
 }
+
+export function authenticatePesapal() {
+  return sendRequest(`${BASE_URL}/pesapal/authenticate`, 'POST');
+}
+
+export function initiateMpesaPayment() {
+  return sendRequest(`${BASE_URL}/initiateMpesaPayment`, 'POST');
+}

@@ -6,7 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        'custom-font': ['"DM Serif Display"', 'serif']
+        'custom-font': ['"DM Serif Display"', 'serif'],
+        'poppins': ['Poppins', 'sans-serif'],
+
       },
       backgroundColor: {
         'custom-yellow': '#EBE2D5',

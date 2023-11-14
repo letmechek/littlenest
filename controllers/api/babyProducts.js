@@ -2,7 +2,8 @@ const BabyProduct = require('../../models/babyProduct')
 module.exports = {
     index,
     show,
-    getProductByCategory
+    getProductByCategory,
+    search
 }
 
 async function index(req, res) {
@@ -28,4 +29,16 @@ async function getProductByCategory(req, res) {
 async function show(req, res) {
     const babyProducts = await BabyProduct.findById(req.params.id)
     res.json(babyProducts)
+}
+
+async function search(req, res) {
+  try {
+    const babyProducts = await BabyProduct.find({
+      name: { $regex: new RegExp(req.query.q, 'i') },
+    });
+    res.status(200).json(babyProducts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
 }

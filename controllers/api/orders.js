@@ -1,10 +1,14 @@
 const { response } = require('express');
 const Order = require('../../models/order');
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const Mpesa = require('mpesa-node')
-const mpesaApi = new Mpesa({ consumerKey: 'fxHfG9fZAXFkLgaAA02mCrBadoZbuudU', consumerSecret: 'rzcRYjwQTGdSoFgR' })
-// CONSUMER_KEY=JrgsGulM3nd0UlQtxqjOfQ3xBk3nz9a5
-// CONSUMER_SECRET=xcukhxceYXl34WL6
+// const consumerKey = process.env.CONSUMER_KEY
+// const consumerSecret = process.env.CONSUMER_SECRET
+const consumerKey =' qkio1BGGYAXTu2JOfm7XSXNruoZsrqEW'
+const consumerSecret = 'osGQ364R49cXKeOYSpaOnT++rHs='
+const axios = require('axios');
+const authenticationUrl = 'https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken';
+const paymentInitiationUrl = 'https://cybqa.pesapal.com/pesapalv3/api/PostPesapalDirectOrderV4';
+
 
 async function cart(req, res) {
   const cart = await Order.getCart(req.user._id)
@@ -67,32 +71,97 @@ async function checkout(req, res) {
     res.status(500).send('Failed to create session');
   }
 }
-// async function createToken(req, res){
-//   mpesaApi
-//   .c2bSimulate(
-//       254793022425,
-//       500,
-//       'h6dk0Ue2',
-//       shortCode = null,
-//   )
-//   .then((result) => {
-//       //do something
-//       console.log(response)
-//       res.json(response)
-//   })
-//   .catch((err) => {
-//       console.log(err)
-//   })
-// }
-//  async function createToken(confirmationUrl, validationUrl, shortCode = null, responseType = 'Completed') {
-//   const req = await this.request()
-//   return req.post('/mpesa/c2b/v1/registerurl', {
-//     'ShortCode': shortCode || this.configs.shortCode,
-//     'ResponseType': responseType,
-//     'ConfirmationURL': confirmationUrl,
-//     'ValidationURL': validationUrl
-//   })
-// }
+const authenticatePesapal = async (req, res) => {
+  try {
+    // Replace these values with your actual consumer key and secret
+    const consumerKey = 'qkio1BGGYAXTu2JOfm7XSXNruoZsrqEW';
+    const consumerSecret = 'osGQ364R49cXKeOYSpaOnT++rHs=';
+
+    // Pesapal API authentication endpoint URL
+    const apiUrl = 'https://cybqa.pesapal.com/pesapalv3/api/Auth/RequestToken';
+
+    // Request payload
+    const requestData = {
+      consumer_key: consumerKey,
+      consumer_secret: consumerSecret,
+    };
+
+    // HTTP headers
+    const headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
+
+    // Make a POST request to Pesapal API for authentication
+    const response = await axios.post(apiUrl, requestData, { headers });
+
+    // Extract relevant data from the response
+    const { token, expiryDate, error, status, message } = response.data;
+
+    // Check for errors in the response
+    if (error) {
+      return res.status(status).json({ error, message });
+    }
+
+    // Successful authentication, send the token and expiry date in the response
+    res.status(200).json({ token, expiryDate, message });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+async function getPesapalAccessToken(consumerKey, consumerSecret) {
+  try {
+    const response = await axios.post(authenticationUrl, {
+      consumer_key: consumerKey,
+      consumer_secret: consumerSecret,
+    });
+
+    return response.data.token;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to retrieve Pesapal access token');
+  }
+}
+
+// Function to initiate M-Pesa payment
+async function initiateMpesaPayment(req, res) {
+  try {
+    // Get necessary details from the request
+    const { orderId, amount, description, phoneNumber, userEmail } = req.body;
+
+    // Get Pesapal access token
+    const accessToken = await getPesapalAccessToken(consumerSecret, consumerKey);
+
+    // Construct the API request payload
+    const apiRequestPayload = {
+      ConsumerKey: consumerKey,
+      ConsumerSecret: consumerSecret,
+      Amount: amount,
+      Description: description,
+      Type: 'MERCHANT',
+      Reference: orderId,
+      PhoneNumber: phoneNumber,
+      Email: userEmail,
+    };
+
+    // Make a POST request to Pesapal API with the access token
+    const response = await axios.post(paymentInitiationUrl, apiRequestPayload, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        'Content-Type': 'application/json',
+      },
+    });
+
+    console.log(response.config.url)
+
+    res.redirect(response.config.url);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to initiate M-Pesa payment' });
+  }
+}
 
 
 module.exports = {
@@ -100,75 +169,6 @@ module.exports = {
   addToCart,
   setItemQtyInCart,
   checkout,
-  // createToken,
-  
+  authenticatePesapal,
+  initiateMpesaPayment
 };
-
-// const request = require('request'); // Node.js HTTP client
-// const { M_PESA_CONSUMER_KEY, M_PESA_CONSUMER_SECRET, M_PESA_PASSKEY, M_PESA_SHORTCODE } = process.env; // Fetch credentials from environment variables
-
-// const checkout = async (req, res) => {
-//   try {
-//     const { amount, phoneNumber } = req.body; // Extract payment details from the request
-
-    // Prepare the request to the M-Pesa API
-    // const options = {
-    //   method: 'POST',
-    //   url: 'https://sandbox.safaricom.co.ke/oauth/v1/generate',
-    //   headers: {
-    //     'Authorization': `Basic ${Buffer.from(`${M_PESA_CONSUMER_KEY}:${M_PESA_CONSUMER_SECRET}`).toString('base64')}`
-    //   }
-    // };
-
-    // request(options, (error, response, body) => {
-    //   if (error) {
-    //     res.status(500).json({ error: 'Failed to authenticate' });
-    //   } else {
-    //     const accessToken = JSON.parse(body).access_token;
-    //     const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, -3);
-    //     const password = Buffer.from(`${M_PESA_SHORTCODE}${M_PESA_PASSKEY}${timestamp}`).toString('base64');
-
-    //     const paymentRequest = {
-    //       BusinessShortCode: M_PESA_SHORTCODE,
-    //       Password: password,
-    //       Timestamp: timestamp,
-    //       TransactionType: 'CustomerPayBillOnline',
-    //       Amount: amount,
-    //       PartyA: phoneNumber,
-    //       PartyB: M_PESA_SHORTCODE,
-    //       PhoneNumber: phoneNumber,
-    //       CallBackURL: 'https://your-callback-url.com', // Your endpoint to handle the response
-    //       AccountReference: 'Your account reference',
-    //       TransactionDesc: 'Transaction description'
-    //     };
-
-    //     const paymentOptions = {
-    //       method: 'POST',
-    //       url: 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
-    //       headers: {
-    //         'Authorization': `Bearer ${accessToken}`,
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(paymentRequest)
-    //     };
-
-    //     request(paymentOptions, (error, response, body) => {
-    //       if (error) {
-    //         res.status(500).json({ error: 'Failed to initiate payment' });
-    //       } else {
-            // Handle the response from the payment request
-            // This typically involves updating your database with the transaction details
-
-            // Return success response to the client
-//             res.status(200).json({ message: 'Payment request initiated successfully' });
-//           }
-//         });
-//       }
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).json({ error: 'An error occurred' });
-//   }
-// };
-
-// module.exports = { checkout };

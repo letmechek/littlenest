@@ -12,7 +12,9 @@ router.post('/create-checkout-session/:orderId', ordersCtrl.checkout);
 // POST /api/orders/cart/qty
 router.put('/cart/qty', ordersCtrl.setItemQtyInCart);
 
-// router.post("/mpesa/c2b/v1/simulate",ordersCtrl.createToken )
+router.post("/pesapal/authenticate",ordersCtrl.authenticatePesapal )
+router.post("/initiateMpesaPayment",ordersCtrl.initiateMpesaPayment )
 // ,ordersCtrl.postStk
 
 module.exports = router;
+// https://cybqa.pesapal.com/pesapalv3
