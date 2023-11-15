@@ -1,46 +1,48 @@
-import { Link } from 'react-router-dom'
-import * as userService from '../../utilities/users-service'
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon, MapPinIcon,ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline'
-import logo from '../../Assets/images/logo.png'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import CartIcon from '../CartIcon/CartIcon'
-import avatar from '../../Assets/images/avatar.png'
+import { Link } from "react-router-dom";
+import * as userService from "../../utilities/users-service";
+import { Fragment } from "react";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import {
+  Bars3Icon,
+  BellIcon,
+  XMarkIcon,
+  MapPinIcon,
+  ArrowLeftOnRectangleIcon,
+} from "@heroicons/react/24/outline";
+import logo from "../../Assets/images/logo.png";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import CartIcon from "../CartIcon/CartIcon";
+import avatar from "../../Assets/images/avatar.png";
 
 const navigation = [
-   
-  { name: '% PROMOTIONS', href: '/', current: false },
-  { name: 'CALL US', href: 'tel:+1234567890', current: false },
-  { name: 'BOOK NOW', href: '#', current: false },
-  {name: <CartIcon />, to: '/cart', current: false},
-]
+  { name: "% PROMOTIONS", href: "/", current: false },
+  { name: "CALL US", href: "tel:+1234567890", current: false },
+  { name: "BOOK NOW", href: "#", current: false },
+  { name: <CartIcon />, to: "/cart", current: false },
+];
 
 const secondNav = [
-    {name: 'HOME PAGE', to: '/', current: false},
-    {name: 'ABOUT US', to: '/about-us', current: false},
-    {name: 'Shop All', to: '/products', current: false},
-    {name: 'OUR LOCATION', to: '/location', current: false},
-   
-]
+  { name: "HOME PAGE", to: "/", current: false },
+  { name: "ABOUT US", to: "/about-us", current: false },
+  { name: "Shop All", to: "/products", current: false },
+  { name: "OUR LOCATION", to: "/location", current: false },
+];
 
 function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(" ");
 }
 
-
-
-export default function NavBar({user , setUser}) {
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-    let navigate 
-    function handleLogOut() {
-        userService.logOut()
-        setUser(null)
-    }
-    return (
-        <>
-        <Disclosure as="nav" className="bg-yellow-700">
+export default function NavBar({ user, setUser }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  let navigate;
+  function handleLogOut() {
+    userService.logOut();
+    setUser(null);
+  }
+  return (
+    <>
+        <Disclosure as="nav" className="bg-sky-800">
         {({ open }) => (
             <>
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -297,5 +299,9 @@ export default function NavBar({user , setUser}) {
         </Disclosure>
         
         </>
-    )
-    }
+
+  );
+};
+
+
+

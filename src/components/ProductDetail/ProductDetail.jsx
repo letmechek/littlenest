@@ -148,6 +148,7 @@ export default function ProductDetail({ user }) {
               ))}
             </Carousel>
           </div>
+          
 
           {/* <!-- Product info --> */}
           <div class="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
@@ -313,7 +314,7 @@ export default function ProductDetail({ user }) {
     <label
       key={index}
       className={`group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-100 focus:outline-none sm:flex-1 sm:py-6 cursor-pointer ${
-        selectedSize === size ? "bg-yellow-700 text-white" : ""
+        selectedSize === size ? "bg-custom-yellow1 text-white" : ""
       }`}
     >
       <input

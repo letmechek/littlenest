@@ -37,13 +37,13 @@ export default function FooterWithSitemap() {
     },
   ];
   return (
-    <footer className="flex bg-white flex-col items-center text-center text-black ">
+    <footer className="flex bg-stone-50 flex-col items-center text-center text-black ">
       <div className="container px-6 pt-6">
         <div className="mb-6 flex justify-center">
           <Link
             to="#!"
             type="button"
-            class="m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal bg-sky-200 text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+            class="m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal bg-custom-yellow text-yellow-700 transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
             data-te-ripple-init
             data-te-ripple-color="light"
           >
@@ -60,7 +60,7 @@ export default function FooterWithSitemap() {
           <Link
             to="#!"
             type="button"
-            class="bg-sky-200 m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+            class=" m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal bg-custom-yellow text-yellow-700 transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
             data-te-ripple-init
             data-te-ripple-color="light"
           >
@@ -77,7 +77,7 @@ export default function FooterWithSitemap() {
           <Link
             to="#!"
             type="button"
-            class="bg-sky-200 m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal text-white transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
+            class=" m-1 h-9 w-9 rounded-full border-2 border-white uppercase leading-normal bg-custom-yellow text-yellow-700 transition duration-150 ease-in-out hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0"
             data-te-ripple-init
             data-te-ripple-color="light"
           >
@@ -121,7 +121,7 @@ export default function FooterWithSitemap() {
               <div class="mb-6 md:mr-auto p-1.5">
                 <button
                   type="submit"
-                  class="inline-block rounded border-2 border-neutral-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-black transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                  class="inline-block  border-2 border-neutral-50 px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal bg-custom-yellow1 text-white rounded-lg transition duration-150 ease-in-out hover:bg-custom-yellow  hover:bg-opacity-10 hover:text-yellow-700 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
                   data-te-ripple-init
                   data-te-ripple-color="light"
                 >

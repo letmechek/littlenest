@@ -16,12 +16,14 @@ import Cart from '../../components/CartIcon/CartIcon';
 import OrderDetail from '../../components/OrderDetail/OrderDetail';
 import Cancel from '../../components/Cancel/Cancel'
 import Success from '../../components/Success/Success'
+import Search from '../../components/Search/Search';
 export default function App() {
   const [user, setUser] = useState(getUser())
 
   return (
     <main className="">
   <Navbar user={user} />
+  <Search />
   <Routes>
 
     <Route path="/cancel" element={<Cancel />} />

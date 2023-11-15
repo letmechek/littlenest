@@ -12,7 +12,7 @@ module.exports = {
       },
       backgroundColor: {
         'custom-yellow': '#EBE2D5',
-        'custom-yellow1': 'bg-yellow-700',
+        'custom-yellow1': '#EDE5DB',
       }
     },
   },
